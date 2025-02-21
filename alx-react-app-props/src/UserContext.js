@@ -1,5 +1,5 @@
 import { createContext } from "./UserContext";
 
-const UserContext = createContext(null);
+const UserContext = createContext();
 
 export default UserContext;
