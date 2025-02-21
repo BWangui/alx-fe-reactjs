@@ -1,4 +1,4 @@
-import { createContext } from "./UserContext";
+import { createContext } from "react";
 
 const UserContext = createContext();
 
