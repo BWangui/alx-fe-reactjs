@@ -2,21 +2,38 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav style={{ padding: '15px', background: '#007bff', textAlign: 'center' }}>
-      <Link to="/" style={{ marginRight: '10px' }}>Home</Link>
-      <Link to="/about" style={{ marginRight: '10px' }}>About</Link>
-      <Link to="/services" style={{ marginRight: '10px' }}>Services</Link>
-      <Link to="/contact">Contact</Link>
+    <nav style={navStyle}>
+      <ul style={ulStyle}>
+        <li><Link to="/" style={linkStyle}>Home</Link></li>
+        <li><Link to="/about" style={linkStyle}>About</Link></li>
+        <li><Link to="/services" style={linkStyle}>Services</Link></li>
+        <li><Link to="/contact" style={linkStyle}>Contact</Link></li>
+      </ul>
     </nav>
   );
 }
 
+// Inline styles as JavaScript objects
+const navStyle = {
+  backgroundColor: "#007bff", // Correct camelCase property
+  padding: "10px 0",
+  textAlign: "center"
+};
+
+const ulStyle = {
+  listStyleType: "none",
+  padding: 0,
+  margin: 0,
+  display: "flex", // Correct property
+  justifyContent: "center", // Correct property
+  gap: "20px"
+};
+
 const linkStyle = {
-    color: 'white',
-    textDecoration: 'none',
-    margin: '0 15px',
-    fontSize: '18px',
-    fontWeight: 'bold'
-}
+  color: "white",
+  textDecoration: "none",
+  fontSize: "18px",
+  fontWeight: "bold"
+};
 
 export default Navbar;
