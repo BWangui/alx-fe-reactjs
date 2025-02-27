@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {useRecipeStore} from './recipeStore';
 
@@ -6,6 +6,13 @@ import {useRecipeStore} from './recipeStore';
 // RecipeList component
 const RecipeList = () => {
   const recipes = useRecipeStore(state => state.recipes);
+  const filteredRecipes = useRecipeStore(state => state.filteredRecipes);
+  const searchTerm = useRecipeStore(state => state.searchTerm);
+  const filterRecipes = useRecipeStore(state => state.filterRecipes);
+
+  useEffect(() => {
+    filterRecipes();
+  }, [searchTerm, recipes, filterRecipes]);
 
   return (
     <div>
@@ -17,6 +24,6 @@ const RecipeList = () => {
       ))}
     </div>
   );
-}
+};
 
 export default RecipeList;
