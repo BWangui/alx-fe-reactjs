@@ -1,16 +1,26 @@
- // RecipeDetails component
+ // EditRecipeForm component
  import { useRecipeStore } from './recipeStore';
+ import React, {useState} from 'react';
 
- const RecipeDetails = ({ recipeId }) => {
-   const recipe = useRecipeStore(state =>
-     state.recipes.find(recipe => recipe.id === recipeId)
-   );
+const EditRecipeForm = ({recipe}) => {
+  const updateRecipe = useRecipeStore(state => state.updateRecipe);
+  const [title, setTitle] = useState(recipe.title);
+  const [description, setDescription] = useState(recipe.description);
 
-   return (
-     <div>
-       <h1>{recipe.title}</h1>
-       <p>{recipe.description}</p>
-       {/* Render EditRecipeForm and DeleteRecipeButton here */}
-     </div>
-   );
- };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    updateRecipe(recipe.id, {title, description});
+  }
+
+  return (
+    <form onSubmit = {handleSubmit}>
+      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title"/>
+
+      <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description"/>
+
+      <button type='submit'>Save Changes</button>
+    </form>
+  )
+}
+
+export default EditRecipeForm;
