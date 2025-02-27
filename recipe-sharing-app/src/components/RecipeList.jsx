@@ -14,6 +14,6 @@
         ))}
       </div>
     );
-  };
+  }
 
   export default RecipeList;
