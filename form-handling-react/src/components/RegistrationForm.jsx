@@ -1,12 +1,13 @@
 import { useState } from "react";
 
 const RegistrationForm = () => {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState({});
-  
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
   });
+
+  const { username, email, password } = formData; 
 
   const [errors, setErrors] = useState({});
 
@@ -38,10 +39,10 @@ const RegistrationForm = () => {
         <input
           type="text"
           name="username"
-          value={formData.username}  
+          value={username}  
           onChange={handleChange}
         />
-        {errors.username && <p style={{ color: "blue" }}>{errors.username}</p>}
+        {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
       </div>
 
       <div>
@@ -49,10 +50,10 @@ const RegistrationForm = () => {
         <input
           type="email"
           name="email"
-          value={formData.email}  
+          value={email}  
           onChange={handleChange}
         />
-        {errors.email && <p style={{ color: "blue" }}>{errors.email}</p>}
+        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
       </div>
 
       <div>
@@ -60,10 +61,10 @@ const RegistrationForm = () => {
         <input
           type="password"
           name="password"
-          value={formData.password}  
+          value={password}  
           onChange={handleChange}
         />
-        {errors.password && <p style={{ color: "blue" }}>{errors.password}</p>}
+        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
       </div>
 
       <button type="submit">Register</button>
