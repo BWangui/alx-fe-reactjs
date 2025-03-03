@@ -18,9 +18,9 @@ const RegistrationForm = () => {
     e.preventDefault();
 
     let validationErrors = {};
-    if (!formData.username.trim()) validationErrors.username = "Username is required";
-    if (!formData.email.trim()) validationErrors.email = "Email is required";
-    if (!formData.password.trim()) validationErrors.password = "Password is required";
+    if (!username.trim()) validationErrors.username = "Username is required";
+    if (!email.trim()) validationErrors.email = "Email is required";
+    if (!password.trim()) validationErrors.password = "Password is required";
 
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
