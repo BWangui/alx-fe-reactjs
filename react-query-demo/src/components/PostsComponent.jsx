@@ -2,17 +2,22 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 
-// Fetch function for posts
+// Function to fetch posts from JSONPlaceholder API
 const fetchPosts = async () => {
   const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts');
   return data;
 };
 
 const PostsComponent = () => {
-  // useQuery hook for fetching posts
+  // useQuery hook with additional options:
+  // - cacheTime: how long unused cache data remains (5 minutes in this example)
+  // - refetchOnWindowFocus: prevents automatic refetching when window regains focus
+  // - keepPreviousData: retains previous data during background refetching
   const { data, isLoading, isError, error, refetch } = useQuery('posts', fetchPosts, {
-    // Optionally, set a stale time to control caching behavior (in milliseconds)
-    staleTime: 10000, // 10 seconds
+    staleTime: 10000, // Data is considered fresh for 10 seconds
+    cacheTime: 300000, // Cache data stays in memory for 5 minutes
+    refetchOnWindowFocus: false, // Disable refetching on window focus
+    keepPreviousData: true, // Keep previous data while fetching new data
   });
 
   if (isLoading) return <div>Loading posts...</div>;
