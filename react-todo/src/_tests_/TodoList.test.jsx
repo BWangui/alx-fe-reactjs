@@ -3,18 +3,14 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import TodoList from "../components/TodoList";
 
-test("toggles todo completion", () => {
+test("deletes a todo", () => {
   render(<TodoList />);
 
-
   const todoItem = screen.getByText("Learn React");
+  const deleteButton = todoItem.nextSibling; 
 
-  expect(todoItem).toHaveStyle("text-decoration: none");
+  
+  fireEvent.click(deleteButton);
 
-  fireEvent.click(todoItem);
-
-  expect(todoItem).toHaveStyle("text-decoration: line-through");
-  fireEvent.click(todoItem);
-
-  expect(todoItem).toHaveStyle("text-decoration: none");
+  expect(screen.queryByText("Learn React")).not.toBeInTheDocument();
 });
