@@ -1,15 +1,21 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
+import ProfileDetails from "./pages/ProfileDetails";
+import ProfileSettings from "./pages/ProfileSettings";
+import BlogPost from "./pages/BlogPost";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<NotFound />} />
+
+        <Route path="/profile" element={<Profile />}>
+          <Route path="details" element={<ProfileDetails />} />
+          <Route path="settings" element={<ProfileSettings />} />
+        </Route>
+
+      
+        <Route path="/blog/:postId" element={<BlogPost />} />
       </Routes>
     </Router>
   );
