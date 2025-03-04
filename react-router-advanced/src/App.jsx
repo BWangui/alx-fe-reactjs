@@ -9,6 +9,7 @@ function App() {
   const[isAuthenticated, setIsAuthenticated] = usestate(false);
 
   return (
+    <AuthProvider>
     <Router>
       
       <div>
@@ -24,6 +25,7 @@ function App() {
         <Route path="/blog/:id" element={<BlogPost />} />
       </Routes>
     </Router>
+    </AuthProvider>
   );
 }
 
