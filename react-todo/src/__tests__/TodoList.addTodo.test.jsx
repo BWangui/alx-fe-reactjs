@@ -1,7 +1,7 @@
 // src/__tests__/TodoList.addTodo.test.jsx
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import TodoList from '../TodoList';
+import TodoList from '../components/TodoList';
 
 describe('TodoList Add Todo', () => {
   test('adds a new todo', () => {
