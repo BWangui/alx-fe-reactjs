@@ -1,8 +1,13 @@
 import { render, screen } from "@testing-library/react";
-import TodoList from "../components/TodoList";  // Adjust path if needed
+import TodoList from "../components/TodoList"; 
 
-test("renders TodoList component", () => {
+test("renders TodoList with initial todos", () => {
   render(<TodoList />);
-  const heading = screen.getByText(/todo list/i);
-  expect(heading).toBeInTheDocument();
+
+  
+  expect(screen.getByText(/todo list/i)).toBeInTheDocument();
+
+  expect(screen.getByText(/Learn React/i)).toBeInTheDocument();
+  expect(screen.getByText(/Build a React project/i)).toBeInTheDocument();
+  expect(screen.getByText(/Master Jest Testing/i)).toBeInTheDocument();
 });
