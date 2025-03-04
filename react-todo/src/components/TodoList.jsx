@@ -1,21 +1,17 @@
 import React, { useState } from "react";
-import AddTodoForm from "./AddTodoForm";
 
-const initialTodos = [
-  { id: 1, text: "Learn React", completed: false },
-  { id: 2, text: "Practice JavaScript", completed: false },
-  { id: 3, text: "Read about Jest", completed: true },
-];
+const TodoList = () => {
+  const [todos, setTodos] = useState([
+    { id: 1, text: "Learn React", completed: false },
+    { id: 2, text: "Build a React project", completed: false },
+    { id: 3, text: "Master Jest Testing", completed: false },
+  ]);
+  const [newTodo, setNewTodo] = useState("");
 
-const [input, setInput] = useState("");
-
-  const TodoList = () => {
-  const [todos, setTodos] = useState(initialTodos);
-
-  const addTodo = (text) => {
-    const newTodo = { id: Date.now(), text:input, completed: false };
-    setTodos([...todos, newTodo]);
-    setInput("");
+  const addTodo = () => {
+    if (newTodo.trim() === "") return;
+    setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+    setNewTodo("");
   };
 
   const toggleTodo = (id) => {
@@ -30,24 +26,20 @@ const [input, setInput] = useState("");
 
   return (
     <div>
-      <h1>Todo List</h1>
+      <h2>Todo List</h2>
       <input
         type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
         placeholder="Add a new task"
+        value={newTodo}
+        onChange={(e) => setNewTodo(e.target.value)}
       />
       <button onClick={addTodo}>Add</button>
-      <AddTodoForm addTodo={addTodo} />
       <ul>
         {todos.map(todo => (
-          <li key={todo.id}>
-            <span
-              style={{ textDecoration: todo.completed ? "line-through" : "none", cursor: "pointer" }}
+          <li key={todo.id}
               onClick={() => toggleTodo(todo.id)}
-            >
-              {todo.text}
-            </span>
+              style={{ textDecoration: todo.completed ? "line-through" : "none" }}>
+            {todo.text}
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
           </li>
         ))}
