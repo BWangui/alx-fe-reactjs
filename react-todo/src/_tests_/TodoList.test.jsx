@@ -13,6 +13,10 @@ test("renders TodoList with initial todos", () => {
 test("adds a new todo", () => {
   render(<TodoList />);
 
+  const input = screen.getByPlaceholderText("Add a new todo...");
+  fireEvent.change(input, { target: { value: "New Todo" } });
+
+
   const addButton = screen.getByText("Add"); 
   fireEvent.click(addButton);
 
