@@ -3,18 +3,24 @@ import Profile from "./components/Profile";
 import ProfileDetails from "./components/ProfileDetails";
 import ProfileSettings from "./components/ProfileSettings";
 import BlogPost from "./components/BlogPost";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+  const[isAuthenticated, setIsAuthenticated] = usestate(false);
+
   return (
     <Router>
-      <Routes>
-
+      
+      <div>
+      <button onClick={() => setIsAuthenticated(!isAutheticated)}></button>
+      </div>
+          
+          <Routes>
         <Route path="/profile" element={<Profile />}>
           <Route path="details" element={<ProfileDetails />} />
           <Route path="settings" element={<ProfileSettings />} />
+          <Route path="ProtectedRoute" element={<ProtectedRoute />} />
         </Route>
-
-      
         <Route path="/blog/:postId" element={<BlogPost />} />
       </Routes>
     </Router>
