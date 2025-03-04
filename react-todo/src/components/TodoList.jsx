@@ -1,16 +1,13 @@
-
 import React, { useState } from "react";
 import TodoItem from "./TodoItem";
 import AddTodoForm from "./AddTodoForm";
 
-const initialTodos = [
-  { id: 1, text: "Learn React", completed: false },
-  { id: 2, text: "Practice Testing", completed: false },
-  { id: 3, text: "Build Projects", completed: false },
-];
-
 const TodoList = () => {
-  const [todos, setTodos] = useState(initialTodos);
+  const [todos, setTodos] = useState([
+    { id: 1, text: "Learn React", completed: false },
+    { id: 2, text: "Practice Testing", completed: false },
+    { id: 3, text: "Build Projects", completed: false },
+  ]);
 
   const addTodo = (text) => {
     setTodos([...todos, { id: Date.now(), text, completed: false }]);
@@ -31,15 +28,10 @@ const TodoList = () => {
   return (
     <div>
       <h2>Todo List</h2>
-      <AddTodoForm addTodo={addTodo} />
+      <AddTodoForm onAdd={addTodo} />
       <ul>
         {todos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            toggleTodo={toggleTodo}
-            deleteTodo={deleteTodo}
-          />
+          <TodoItem key={todo.id} todo={todo} onToggle={toggleTodo} onDelete={deleteTodo} />
         ))}
       </ul>
     </div>
