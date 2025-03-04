@@ -3,11 +3,8 @@ import TodoList from "../components/TodoList";
 
 test("renders TodoList with initial todos", () => {
   render(<TodoList />);
-  console.log(screen.debug());
   expect(screen.getByText("Learn React")).toBeInTheDocument();
-  console.log(screen.debug());
   expect(screen.getByText("Practice Testing")).toBeInTheDocument();
-  console.log(screen.debug());
   expect(screen.getByText("Build Projects")).toBeInTheDocument();
 });
 
