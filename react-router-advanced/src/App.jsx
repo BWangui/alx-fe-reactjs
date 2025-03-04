@@ -21,7 +21,7 @@ function App() {
           <Route path="settings" element={<ProfileSettings />} />
           <Route path="ProtectedRoute" element={<ProtectedRoute />} />
         </Route>
-        <Route path="/blog/:postId" element={<BlogPost />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
       </Routes>
     </Router>
   );
