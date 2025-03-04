@@ -7,12 +7,15 @@ const initialTodos = [
   { id: 3, text: "Read about Jest", completed: true },
 ];
 
-const TodoList = () => {
+const [input, setInput] = useState("");
+
+  const TodoList = () => {
   const [todos, setTodos] = useState(initialTodos);
 
   const addTodo = (text) => {
-    const newTodo = { id: Date.now(), text, completed: false };
+    const newTodo = { id: Date.now(), text:input, completed: false };
     setTodos([...todos, newTodo]);
+    setInput("");
   };
 
   const toggleTodo = (id) => {
@@ -28,6 +31,13 @@ const TodoList = () => {
   return (
     <div>
       <h1>Todo List</h1>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Add a new task"
+      />
+      <button onClick={addTodo}>Add</button>
       <AddTodoForm addTodo={addTodo} />
       <ul>
         {todos.map(todo => (
