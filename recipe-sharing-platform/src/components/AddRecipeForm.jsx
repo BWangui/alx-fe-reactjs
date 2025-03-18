@@ -41,7 +41,7 @@ const AddRecipeForm = () => {
     }
 
     setError('');
-    // Replace console.log with API call or state update logic as needed
+    // Replace console.log with your API call or state update logic
     console.log('Submitting Recipe:', formData);
 
     // Reset form after submission
@@ -53,13 +53,13 @@ const AddRecipeForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Add New Recipe</h2>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-md mt-8">
+      <h2 className="text-3xl font-extrabold text-gray-800 mb-6 text-center">Add New Recipe</h2>
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* Recipe Title */}
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="title" className="block text-lg font-medium text-gray-700">
             Recipe Title
           </label>
           <input
@@ -69,12 +69,13 @@ const AddRecipeForm = () => {
             value={formData.title}
             onChange={handleChange}
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            className="mt-2 block w-full rounded-lg border border-gray-300 p-3 focus:border-indigo-500 focus:ring-indigo-500"
+            placeholder="Enter the recipe title"
           />
         </div>
         {/* Ingredients */}
         <div>
-          <label htmlFor="ingredients" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="ingredients" className="block text-lg font-medium text-gray-700">
             Ingredients
           </label>
           <textarea
@@ -84,37 +85,16 @@ const AddRecipeForm = () => {
             value={formData.ingredients}
             onChange={handleChange}
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-            placeholder="Enter ingredients separated by commas or new lines"
+            className="mt-2 block w-full rounded-lg border border-gray-300 p-3 focus:border-indigo-500 focus:ring-indigo-500"
+            placeholder="List ingredients, separated by commas or new lines"
           ></textarea>
         </div>
         {/* Preparation Steps */}
         <div>
-          <label htmlFor="steps" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="steps" className="block text-lg font-medium text-gray-700">
             Preparation Steps
           </label>
           <textarea
             name="steps"
             id="steps"
-            rows="4"
-            value={formData.steps}
-            onChange={handleChange}
-            required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-          ></textarea>
-        </div>
-        {/* Submit Button */}
-        <div>
-          <button
-            type="submit"
-            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition-colors"
-          >
-            Submit Recipe
-          </button>
-        </div>
-      </form>
-    </div>
-  );
-};
-
-export default AddRecipeForm;
+            rows="4
