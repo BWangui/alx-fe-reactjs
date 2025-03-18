@@ -1,4 +1,4 @@
-// src/components/AddRecipeForm.jsx
+// src/components/AddRecipeForm.js
 import React, { useState } from 'react';
 
 const AddRecipeForm = () => {
@@ -7,59 +7,40 @@ const AddRecipeForm = () => {
     ingredients: '',
     steps: '',
   });
-
-  // Use an object to track errors for each field
-  const [errors, setErrors] = useState({});
+  const [error, setError] = useState('');
 
   // Handle input changes for all fields
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    // Clear error for the field being updated
-    setErrors((prev) => ({
-      ...prev,
-      [name]: '',
-    }));
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   // Validate ingredients to ensure at least two items are provided
   const validateIngredients = (ingredients) => {
+    // Split the ingredients string by comma or newline and filter out empty strings
     const items = ingredients.split(/[\n,]+/).map(item => item.trim()).filter(item => item !== '');
     return items.length >= 2;
-  };
-
-  // Validate all fields and update errors object accordingly
-  const validateForm = () => {
-    const newErrors = {};
-
-    if (!formData.title.trim()) {
-      newErrors.title = 'Recipe title is required.';
-    }
-    if (!formData.ingredients.trim()) {
-      newErrors.ingredients = 'Ingredients are required.';
-    } else if (!validateIngredients(formData.ingredients)) {
-      newErrors.ingredients = 'Please enter at least two ingredients.';
-    }
-    if (!formData.steps.trim()) {
-      newErrors.steps = 'Preparation steps are required.';
-    }
-
-    setErrors(newErrors);
-    // Return true if there are no errors
-    return Object.keys(newErrors).length === 0;
   };
 
   // Handle form submission with validation logic
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!validateForm()) {
+    // Ensure all fields are filled out
+    if (!formData.title || !formData.ingredients || !formData.steps) {
+      setError('Please fill in all fields.');
       return;
     }
 
+    // Validate ingredients list
+    if (!validateIngredients(formData.ingredients)) {
+      setError('Please enter at least two ingredients.');
+      return;
+    }
+
+    setError('');
     // Replace console.log with your API call or state update logic
     console.log('Submitting Recipe:', formData);
 
@@ -69,12 +50,12 @@ const AddRecipeForm = () => {
       ingredients: '',
       steps: '',
     });
-    setErrors({});
   };
 
   return (
     <div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-md mt-8">
       <h2 className="text-3xl font-extrabold text-gray-800 mb-6 text-center">Add New Recipe</h2>
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Recipe Title */}
         <div>
@@ -87,12 +68,10 @@ const AddRecipeForm = () => {
             id="title"
             value={formData.title}
             onChange={handleChange}
-            className={`mt-2 block w-full rounded-lg border p-3 focus:border-indigo-500 focus:ring-indigo-500 ${
-              errors.title ? 'border-red-500' : 'border-gray-300'
-            }`}
+            required
+            className="mt-2 block w-full rounded-lg border border-gray-300 p-3 focus:border-indigo-500 focus:ring-indigo-500"
             placeholder="Enter the recipe title"
           />
-          {errors.title && <p className="text-red-500 mt-1 text-sm">{errors.title}</p>}
         </div>
         {/* Ingredients */}
         <div>
@@ -105,12 +84,10 @@ const AddRecipeForm = () => {
             rows="4"
             value={formData.ingredients}
             onChange={handleChange}
-            className={`mt-2 block w-full rounded-lg border p-3 focus:border-indigo-500 focus:ring-indigo-500 ${
-              errors.ingredients ? 'border-red-500' : 'border-gray-300'
-            }`}
+            required
+            className="mt-2 block w-full rounded-lg border border-gray-300 p-3 focus:border-indigo-500 focus:ring-indigo-500"
             placeholder="List ingredients, separated by commas or new lines"
           ></textarea>
-          {errors.ingredients && <p className="text-red-500 mt-1 text-sm">{errors.ingredients}</p>}
         </div>
         {/* Preparation Steps */}
         <div>
@@ -123,12 +100,10 @@ const AddRecipeForm = () => {
             rows="4"
             value={formData.steps}
             onChange={handleChange}
-            className={`mt-2 block w-full rounded-lg border p-3 focus:border-indigo-500 focus:ring-indigo-500 ${
-              errors.steps ? 'border-red-500' : 'border-gray-300'
-            }`}
+            required
+            className="mt-2 block w-full rounded-lg border border-gray-300 p-3 focus:border-indigo-500 focus:ring-indigo-500"
             placeholder="Describe the preparation steps"
           ></textarea>
-          {errors.steps && <p className="text-red-500 mt-1 text-sm">{errors.steps}</p>}
         </div>
         {/* Submit Button */}
         <div>
