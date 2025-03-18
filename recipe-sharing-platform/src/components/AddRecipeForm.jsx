@@ -97,4 +97,26 @@ const AddRecipeForm = () => {
           <textarea
             name="steps"
             id="steps"
-            rows="4
+            rows="4"
+            value={formData.steps}
+            onChange={handleChange}
+            required
+            className="mt-2 block w-full rounded-lg border border-gray-300 p-3 focus:border-indigo-500 focus:ring-indigo-500"
+            placeholder="Describe the preparation steps"
+          ></textarea>
+        </div>
+        {/* Submit Button */}
+        <div>
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300"
+          >
+            Submit Recipe
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default AddRecipeForm;
