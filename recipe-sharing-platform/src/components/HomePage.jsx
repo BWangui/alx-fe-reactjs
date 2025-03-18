@@ -1,4 +1,5 @@
-
+import { Link } from "react-router-dom";
+import recipesData from "../data.json";
 import React, { useState, useEffect } from 'react';
 
 const HomePage = () => {
