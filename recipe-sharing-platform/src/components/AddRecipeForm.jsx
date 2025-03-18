@@ -7,7 +7,7 @@ const AddRecipeForm = () => {
     ingredients: '',
     steps: '',
   });
-  const [error, setError] = useState('');
+  const [errors, setError] = useState('');
 
   // Handle input changes for all fields
   const handleChange = (e) => {
