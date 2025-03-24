@@ -1,76 +1,71 @@
 import React, { useState } from 'react';
-import { fetchUserData } from '../services/githubService';
 
-const Search = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [user, setUser] = useState(null);
+const AdvancedSearch = ({ onSearch }) => {
+  const [username, setUsername] = useState('');
+  const [location, setLocation] = useState('');
+  const [minRepos, setMinRepos] = useState('');
 
-  const handleInputChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!searchTerm.trim()) return;
-
-    // Reset state before new search
-    setLoading(true);
-    setError('');
-    setUser(null);
-
-    try {
-      const data = await fetchUserData(searchTerm);
-      setUser(data);
-    } catch (err) {
-      setError("Looks like we cant find the user");
-    } finally {
-      setLoading(false);
-    }
+    // Pass the search parameters to the parent component
+    onSearch({ username, location, minRepos });
   };
 
   return (
-    <div>
-      {/* Search Input */}
-      <form onSubmit={handleSubmit} className="mb-4">
+    <form onSubmit={handleSubmit} className="max-w-xl mx-auto p-4 bg-white shadow-md rounded">
+      {/* Username Field */}
+      <div className="mb-4">
+        <label htmlFor="username" className="block text-gray-700 font-bold mb-2">
+          GitHub Username
+        </label>
         <input
+          id="username"
           type="text"
-          placeholder="Search GitHub users..."
-          value={searchTerm}
-          onChange={handleInputChange}
-          className="border p-2 w-full"
+          placeholder="Enter GitHub username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
         />
-        <button type="submit" className="bg-blue-500 text-white p-2 mt-2">
-          Search
-        </button>
-      </form>
+      </div>
 
-      {/* Conditional Rendering */}
-      {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>}
-      {user && (
-        <div className="border p-4 mt-4 flex items-center space-x-4">
-          <img
-            src={user.avatar_url}
-            alt={user.name || user.login}
-            className="w-16 h-16 rounded-full"
-          />
-          <div>
-            <h2 className="text-xl font-bold">{user.name || user.login}</h2>
-            <a
-              href={user.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500"
-            >
-              View Profile
-            </a>
-          </div>
-        </div>
-      )}
-    </div>
+      {/* Location Field */}
+      <div className="mb-4">
+        <label htmlFor="location" className="block text-gray-700 font-bold mb-2">
+          Location
+        </label>
+        <input
+          id="location"
+          type="text"
+          placeholder="Enter location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
+        />
+      </div>
+
+      {/* Minimum Repositories Field */}
+      <div className="mb-4">
+        <label htmlFor="minRepos" className="block text-gray-700 font-bold mb-2">
+          Minimum Repositories
+        </label>
+        <input
+          id="minRepos"
+          type="number"
+          placeholder="Enter minimum repositories"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
+          className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition"
+      >
+        Search
+      </button>
+    </form>
   );
 };
 
-export default Search;
+export default AdvancedSearch;
