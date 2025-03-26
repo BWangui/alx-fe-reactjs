@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { fetchUserData } from '../services/githubService';
+import axios from "axios";
 
 const AdvancedSearch = () => {
-  const [username, setUsername] = useState('');
-  const [location, setLocation] = useState('');
-  const [minRepos, setMinRepos] = useState('');
+  const [username, setUsername] = useState("");
+  const [location, setLocation] = useState("");
+  const [minRepos, setMinRepos] = useState("");
   const [results, setResults] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
+  const [userData, setUserData] = useState(null);
 
-  const perPage = 30; // GitHub API default per_page
+  const perPage = 30; 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
